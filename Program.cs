@@ -16,6 +16,7 @@ namespace Visitor
             System.Console.ReadLine();
         }
     }
+    
     public class Village
     {
        private List<IEntity> _entities = new List<IEntity>();
@@ -24,10 +25,12 @@ namespace Visitor
        public void Talk(IVisitor visitor)=> _entities.ForEach(e => e.Accept(visitor));
 
     }
+    
     public interface IEntity
     {
         void Accept(IVisitor visitor);
     }
+    
     public abstract class Animal
     {
         public string Name { get; set; }
@@ -38,6 +41,7 @@ namespace Visitor
             Age = age;
         }
     }
+    
     public abstract class Person
     {
         public string FirstName { get; set; }
@@ -50,6 +54,7 @@ namespace Visitor
             Age =age;
         }
     }
+    
     public class Farmer : Person, IEntity
     {
         public Farmer(string firstName, string lastName, int age) : base(firstName, lastName, age)
@@ -60,6 +65,7 @@ namespace Visitor
             visitor.Live(this);
         }
     }
+    
     public class Cat : Animal, IEntity
     {
         public Cat(string name, int age) : base(name, age)
@@ -71,6 +77,7 @@ namespace Visitor
             visitor.Live(this);
         }
     }
+    
     public class Dog : Animal, IEntity
     {
         public Dog(string name, int age) : base(name, age)
@@ -82,12 +89,14 @@ namespace Visitor
             visitor.Live(this);
         }
     }
+    
    public interface IVisitor
     {
        void Live(Cat cat);
        void Live(Dog dog);
        void Live(Farmer farmer);
    }
+    
     public  class Visitor : IVisitor
     {
         public void Live(Cat cat)
